@@ -13,7 +13,7 @@ void merge(int leftstart, int leftend, int rightstart, int rightend){
 	int i = leftstart, j = rightstart, k = leftstart;
 
 	// Merge the two sorted halves into B
-	while (leftstart < leftend && rightstart < rightend){
+	while (i < leftend && j < rightend){
 		if (A[i] <= A[j]) {
 			B[k] = A[i];
 			i++;
@@ -25,14 +25,14 @@ void merge(int leftstart, int leftend, int rightstart, int rightend){
 	}
 
 	// Copy any remaining elements from left half
-	while (leftstart < leftend){
+	while (i < leftend){
 		B[k] = A[i];
 		i++;
 		k++;
 	}
 
 	// Copy any remaining elements from right half
-	while(rightstart < rightend){
+	while(j < rightend){
 		B[k] = A[j];
 		j++;
 		k++;
