@@ -7,7 +7,7 @@
 #include <stdlib.h> /* for malloc */
 #include "mergesort.h"
 
-/* this function will be called by mergesort() and also by parallel_mergesort(). */
+/* this function will be called by mergesort() and also by parallel_mergesort(). ALEX */
 void merge(int leftstart, int leftend, int rightstart, int rightend){
 
 	int i = leftstart, j = rightstart, k = leftstart;
@@ -44,7 +44,7 @@ void merge(int leftstart, int leftend, int rightstart, int rightend){
 	}
 }
 
-/* this function will be called by parallel_mergesort() as its base case. */
+/* this function will be called by parallel_mergesort() as its base case. ALEX */
 void my_mergesort(int left, int right){
 	if (left < right){
 		int mid = left + (right - left) / 2;
@@ -58,12 +58,12 @@ void my_mergesort(int left, int right){
 	}
 }
 
-/* this function will be called by the testing program. */
+/* this function will be called by the testing program. MIHIR */
 void * parallel_mergesort(void *arg){
 		return NULL;
 }
 
-/* we build the argument for the parallel_mergesort function. */
+/* we build the argument for the parallel_mergesort function. VISHU */
 struct argument * buildArgs(int left, int right, int level){
 		return NULL;
 }
