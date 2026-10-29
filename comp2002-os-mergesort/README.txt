@@ -86,12 +86,12 @@ Mihir - One of the main challenges I faced was understanding recursive multithre
 to ensure threads finished before merging. I also found managing memory and implementing cutoff levels challenging. 
 Overall, this assignment improved my understanding of thread synchronisation, memory management, and parallel execution in C.
 
-Alex - From this assignment, I developed a better understanding of recursive algorithms and multithreading programming. 
-One challenge was that I needed to consider how multiple threads coulkd work on different parts of the array without inteferring 
+Alex - From this assignment, I developed a better understanding of recursive algorithms, such as merge sort, and multithreading programming. 
+One challenge was that I needed to consider how multiple threads could work on different parts of the array without interfering 
 each other, through using pthread_create() and pthread_join(). 
 
 Vishu - From this assignment, i developed a better understanding of pointers, structs, and memory allocation in C. One challenge 
-was understanding how to pass multiple values to a thread, which i solved by using struct argument and the buildArgs() function.
+was understanding how to pass multiple values to a thread, which I solved by using struct argument and the buildArgs() function.
 this helped me understand how threads receive arguments and how memory should be managed safely. 
 
 ## Sources Used
