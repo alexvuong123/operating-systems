@@ -90,7 +90,9 @@ Alex - From this assignment, I developed a better understanding of recursive alg
 One challenge was that I needed to consider how multiple threads coulkd work on different parts of the array without inteferring 
 each other, through using pthread_create() and pthread_join(). 
 
-Vishu - 
+Vishu - From this assignment, i developed a better understanding of pointers, structs, and memory allocation in C. One challenge 
+was understanding how to pass multiple values to a thread, which i solved by using struct argument and the buildArgs() function.
+this helped me understand how threads receive arguments and how memory should be managed safely. 
 
 ## Sources Used
 
