@@ -1,57 +1,96 @@
-README.template
+## Multi-Threaded Network Server for Pattern Analysis - Group 29
 
-## Project Number/Title 
-
-* Authors: Your Name, and your group members’ names
-* Group name: Your Group Name
+* Authors: Mihir Patel, Alex Vuong & Vishu Mittal
+* Group name: OS Group 29
 
 ## Overview
-
-Concisely explain what the program does. If this exceeds a couple of
-sentences, you're going too far. Generally, you should be pulling this
-right from the project specification. We don't want you to just cut and
-paste, but paraphrase what is stated in the project specification.
+This program implements serial and parallel merge sort in C to sort randomly generated arrays. 
+It uses POSIX threads (pthreads) and a configurable cutoff level to enable concurrent sorting, 
+aiming to achieve at least a 2× speedup over the serial version when sorting 100 million elements.
 
 ## Manifest
-
-A listing of source files and other non-generated files, and a brief
-(one-line) explanation of the purpose of each file.
+1. mergesort.h - Header file containing function declarations, the thread argument structure, and global variables used by the merge sort implementation.
+2. mergesort.c - Implements serial and parallel merge sort, including merging sorted subarrays, multithreading, cutoff-level control and thread argument creation.
+3. Makefile - Automates the compilation of the source files to create the test-mergesort executable and provides a command to clean generated files.
+4. test-mergesort.c - Generates random arrays, runs the merge sort program, verifies sorting correctness and measures execution time.
 
 ## Building the project
+1. To build the project, open a terminal in the `comp2002-os-mergesort` directory and run:
+`make`
+-> This compiles the source files and creates the `test-mergesort` executable.
 
-This section should tell the user how to build your code.  If you are
-delivering a library, where does it need to be installed, or how do you use
-it? Is this an executable, if so, how can a user get up to speed as fast as
-possible?
+2. To remove generated files, run:
+`make clean`
+
+3. To clear the terminal, run:
+`clear`
 
 ## Features and usage
+The program supports both serial and parallel merge sort using POSIX threads (pthreads). 
+Users can specify the array size, cutoff level, and random seed to control execution. 
+It also verifies that the array is correctly sorted and displays the execution time.
 
-Summarise the main features of your program. It is also appropriate to
-instruct the user how to use your program.
+1. To run the program:
+`./test-mergesort <input_size> <cutoff_level> <seed>`
+-> For example:
+`./test-mergesort 1000000 4 1234`
+
+A cutoff level of `0` performs serial sorting, while higher levels enable parallel 
+sorting using multiple threads.
 
 ## Testing
 
-This section should detail how you tested your code. Simply stating "I ran
-it a few times and it seems to work" is not sufficient. Your testing needs
-to be detailed here.
+The program was tested on a MacBook Pro M4 Pro using different array sizes and
+cutoff levels to verify sorting correctness, performance, and thread safety.
+
+### Correctness Testing
+The provided `test-mergesort.c` program was used to generate random arrays, 
+verify correct sorting, and measure execution time. The following tests passed:
+
+- 100 elements with cutoff level 0
+- 10,000 elements with cutoff level 2
+- 1,000,000 elements with cutoff level 4
+- 100,000,000 elements with cutoff levels 0, 4, and 6
+
+### Performance Testing
+Performance was measured using 100,000,000 elements with a random seed of 1234.
+
+- Cutoff 0 (Serial): 13.67 seconds.
+- Cutoff 4 (Parallel): 1.95 seconds (7.01x speedup).
+- Cutoff 6 (Parallel): 1.94 seconds (7.05x speedup).
+
+The parallel implementation achieved a maximum observed speedup of 7.05, 
+exceeding the required 2x speedup in local testing.
+
+### Memory and Thread Safety Testing
+
+AddressSanitizer and ThreadSanitizer were used to identify potential memory errors and data races.
+
+- AddressSanitizer: Passed with 10,000 elements at cutoff 2 and 1,000,000 elements at cutoff 4
+- ThreadSanitizer: Passed with 100,000 elements at cutoff 4
+
+No memory errors or data races were reported during these tests.
+
+Overall, the results demonstrate correct sorting, improved parallel performance, and no 
+detected memory or threading issues in the tested cases.
+
 
 ## Known Bugs
-
-List known bugs that you weren't able to fix (or ran out of time to fix).
+No known bugs were identified during local testing or the visible Gradescope tests.
+The program passed correctness, memory safety, and thread safety checks without reported errors. 
+However, the results of the hidden Gradescope tests are not available, so their outcomes cannot be confirmed.
 
 ## Reflection and Self Assessment
 
-Discuss the issues you encountered during development and testing. What
-problems did you have? What did you have to research and learn on your own?
-What kinds of errors did you get? How did you fix them?
+Mihir - One of the main challenges I faced was understanding recursive multithreading and how to use pthread_join()
+to ensure threads finished before merging. I also found managing memory and implementing cutoff levels challenging. 
+Overall, this assignment improved my understanding of thread synchronisation, memory management, and parallel execution in C.
 
-What parts of the project did you find challenging? Is there anything that
-finally "clicked" for you in the process of working on this project? How well
-did the development and testing process go for you?
+Alex -
+
+Vishu - 
 
 ## Sources Used
 
-If you used any sources outside of the textbook, you should list them here. 
-If you looked something up on stackoverflow.com or you use help from AI, and 
-fail to cite it in this section, it will be considered plagiarism and dealt 
-with accordingly. So be safe CITE!
+ChatGPT-6 was used as an external resource during development to assist with refining, 
+debugging, testing and explaining technical concepts.
